@@ -431,6 +431,9 @@ p {
    .shorten {
       margin-left: 2rem;
    }
+   .shortened{
+     padding-left:2rem;
+    }
    .card figure {
       left: 44%;
    }
@@ -474,7 +477,6 @@ p {
    }
    .shortened {
       padding-top: 90px;
-      padding-left: 1.5rem;
    }
    .display {
       width: 100%;
