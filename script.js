@@ -11,6 +11,11 @@ showMenu.onclick = () => menu.classList.toggle("display-menu");
 let storedShortLinks = JSON.parse(localStorage.getItem("shortedLinks"));
 let storedLongLinks = JSON.parse(localStorage.getItem("longLinks"));
 getLinks();
+const copy = (url, copyBtn) => {
+   navigator.clipboard.writeText(url);
+   copyBtn.textContent = "copied!";
+   copyBtn.classList.add("copied");
+};
 function getLinks() {
    if (storedShortLinks && storedLongLinks) {
       for (let i = 0; i < storedShortLinks.length; i++) {
@@ -37,6 +42,8 @@ clearBtn.onclick = () => {
    localStorage.clear();
    storedLongLinks = [];
    storedShortLinks = [];
+   shortenLinks = [];
+   longlinks = [];
    shortLinkContainer.innerHTML = "";
 };
 shortenBtn.onclick = () => {
@@ -80,6 +87,7 @@ const displayUrl = async () => {
         <button class="copy">copy</button>
      </div>
   </div>`;
+      inputLink.value = "";
       clearBtn.style.display = "block";
       const copyBtn = document.querySelectorAll(".copy");
       copyBtn.forEach((copyBtn) => {
@@ -89,9 +97,4 @@ const displayUrl = async () => {
          };
       });
    }
-};
-const copy = (url, copyBtn) => {
-   navigator.clipboard.writeText(url);
-   copyBtn.textContent = "copied!";
-   copyBtn.classList.add("copied");
 };
