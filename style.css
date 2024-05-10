@@ -242,6 +242,7 @@ main {
    padding: 1rem;
    color: var(--Very-Dark-Violet);
    font-weight: 500;
+   word-wrap: break-word;
 }
 main article h2 {
    font-size: 1.8rem;
