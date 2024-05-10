@@ -195,7 +195,6 @@ main {
 }
 .clear {
    max-width: 150px;
-   display: none;
 }
 .shorten button,
 .display button,

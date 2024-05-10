@@ -8,8 +8,8 @@ const clearBtn = document.querySelector(".clear");
 let shortenLinks = [];
 let longlinks = [];
 showMenu.onclick = () => menu.classList.toggle("display-menu");
-const storedShortLinks = JSON.parse(localStorage.getItem("shortedLinks"));
-const storedLongLinks = JSON.parse(localStorage.getItem("longLinks"));
+let storedShortLinks = JSON.parse(localStorage.getItem("shortedLinks"));
+let storedLongLinks = JSON.parse(localStorage.getItem("longLinks"));
 getLinks();
 function getLinks() {
    if (storedShortLinks && storedLongLinks) {
@@ -35,8 +35,9 @@ function getLinks() {
 }
 clearBtn.onclick = () => {
    localStorage.clear();
+   storedLongLinks = [];
+   storedShortLinks = [];
    shortLinkContainer.innerHTML = "";
-   clearBtn.style.display = "none";
 };
 shortenBtn.onclick = () => {
    inputLink.classList.remove("errorState");
