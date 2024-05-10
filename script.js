@@ -4,9 +4,40 @@ const showMenu = document.querySelector(".showMenu");
 const menu = document.querySelector(".menu-container");
 const showError = document.querySelector(".error");
 const shortenBtn = document.getElementById("shorten");
-
+const clearBtn = document.querySelector(".clear");
+let shortenLinks = [];
+let longlinks = [];
 showMenu.onclick = () => menu.classList.toggle("display-menu");
-
+const storedShortLinks = JSON.parse(localStorage.getItem("shortedLinks"));
+const storedLongLinks = JSON.parse(localStorage.getItem("longLinks"));
+getLinks();
+function getLinks() {
+   if (storedShortLinks && storedLongLinks) {
+      for (let i = 0; i < storedShortLinks.length; i++) {
+         shortLinkContainer.innerHTML += `<div class="display">
+         <div class="longlink">${storedLongLinks[i]}</div>
+         <div class="shortened-link">
+            <div class="showshortlink">${storedShortLinks[i]}</div>
+            <button class="copy">copy</button>
+         </div>
+      </div>`;
+      }
+      const copyBtn = document.querySelectorAll(".copy");
+      copyBtn.forEach((copyBtn) => {
+         copyBtn.onclick = () => {
+            const showShortedUrl = copyBtn.previousElementSibling.textContent;
+            copy(showShortedUrl, copyBtn);
+         };
+      });
+      shortenLinks = storedShortLinks;
+      longlinks = storedLongLinks;
+   }
+}
+clearBtn.onclick = () => {
+   localStorage.clear();
+   shortLinkContainer.innerHTML = "";
+   clearBtn.style.display = "none";
+};
 shortenBtn.onclick = () => {
    inputLink.classList.remove("errorState");
    showError.textContent = "";
@@ -15,6 +46,8 @@ shortenBtn.onclick = () => {
       inputLink.classList.add("errorState");
       return;
    }
+   longlinks.push(inputLink.value);
+   localStorage.setItem("longLinks", JSON.stringify(longlinks));
    displayUrl();
 };
 const shortenUrl = async () => {
@@ -37,6 +70,8 @@ const shortenUrl = async () => {
 const displayUrl = async () => {
    const shortenedLink = await shortenUrl();
    if (shortenedLink) {
+      shortenLinks.push(shortenedLink);
+      localStorage.setItem("shortedLinks", JSON.stringify(shortenLinks));
       shortLinkContainer.innerHTML += `<div class="display">
      <div class="longlink">${inputLink.value}</div>
      <div class="shortened-link">
@@ -44,14 +79,18 @@ const displayUrl = async () => {
         <button class="copy">copy</button>
      </div>
   </div>`;
+      clearBtn.style.display = "block";
       const copyBtn = document.querySelectorAll(".copy");
       copyBtn.forEach((copyBtn) => {
-         const showShortedUrl = copyBtn.previousElementSibling.textContent;
          copyBtn.onclick = () => {
-            navigator.clipboard.writeText(showShortedUrl);
-            copyBtn.textContent = "copied!";
-            copyBtn.classList.add("copied");
+            const showShortedUrl = copyBtn.previousElementSibling.textContent;
+            copy(showShortedUrl, copyBtn);
          };
       });
    }
+};
+const copy = (url, copyBtn) => {
+   navigator.clipboard.writeText(url);
+   copyBtn.textContent = "copied!";
+   copyBtn.classList.add("copied");
 };
