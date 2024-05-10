@@ -41,6 +41,9 @@ header nav {
    padding: 1.8rem;
    background-color: var(--Dark-Violet);
 }
+.display-menu{
+   display: block;
+}
 .menu ul {
    list-style: none;
    margin-top: 1rem;
@@ -163,14 +166,31 @@ main {
    position: absolute;
    top: -80px;
 }
+.inputContain{
+   width: 100%;
+}
+.error{
+   color: var(--Red);
+   font-style: italic;
+   font-size: 15px;
+}
+.shorten .errorState{
+   border: 3px solid var(--Red);
+}
+.shorten .errorState::placeholder{
+   color: var(--Red);
+   opacity: 0.4;
+   font-weight: 700;
+}
 .shorten input,
 .shorten button,
 .display button {
    padding: 1rem;
-   width: 95%;
+   width: 100%;
    font-size: 18px;
    border: 0;
    border-radius: 6px;
+   outline: 0;
 }
 .shorten button,
 .display button {
@@ -196,6 +216,15 @@ main {
    padding: 0.6rem;
    width: 100%;
    margin-top: 15px;
+   font-size: 15px;
+   text-transform: capitalize;
+}
+.display .copied{
+   background-color: var(--Very-Dark-Blue);
+   color: #fff;
+}
+.display .copied:hover{
+   background-color: var(--Very-Dark-Blue);
 }
 .shortened-link {
    color: var(--Cyan);
@@ -470,10 +499,11 @@ p {
       background-image: url("images/bg-shorten-desktop.svg");
    }
    .shorten input {
-      width: 80%;
+      width: 100%;
    }
    .shorten button {
       width: 20%;
+      align-self: flex-start;
    }
    .shortened {
       padding-top: 90px;

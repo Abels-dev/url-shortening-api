@@ -3,13 +3,14 @@
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
       <link
          rel="icon"
          type="image/png"
          sizes="32x32"
          href="./images/favicon-32x32.png" />
-         <link rel="stylesheet" href="style.css">
-      <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
+      <link rel="stylesheet" href="style.css" />
+      <script src="script.js" defer></script>
    </head>
    <body>
       <header>
@@ -48,18 +49,16 @@
       </header>
       <main>
          <section class="shorten">
-            <input type="text" placeholder="Shorten a link here..." />
-            <button>Shorten It!</button>
-         </section>
-         <section class="shortened">
-            <div class="display">
-               <div class="longlink">https://gemini.google.com/app</div>
-               <div class="shortened-link">
-                  <div>https://rel.ink</div>
-                  <button>copy</button>
-               </div>
+            <div class="inputContain">
+               <input
+                  type="text"
+                  placeholder="Shorten a link here..."
+                  id="longlink" />
+               <div class="error"></div>
             </div>
+            <button id="shorten">Shorten It!</button>
          </section>
+         <section class="shortened"></section>
          <article>
             <h2>Advanced Statistics</h2>
             <p>
