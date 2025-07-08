@@ -23,4 +23,4 @@ Users should be able to:
 -  JavaScript
 
 ### Preview
-- https://abels-dev.github.io/url-shortening-api/
+- https://shortly-mu-ashen.vercel.app/
